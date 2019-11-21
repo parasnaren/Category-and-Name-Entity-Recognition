@@ -1,5 +1,16 @@
 # Category-and-Name-Entity-Recognition
-A program that performs named entity and category recognition on English sentences.
+Program that performs named entity and category recognition on English sentences. We provide a User Interface that takes sentences as input. We developed 2 models that independently perform both tasks simultaneously on the input from the UI.
+
+* **Named Entities** are colored by the corresponding tags that they belong
+* **Categories** are displayed at the bottom in Black
+
+
+## Results
+
+1. For *Category classification*, we achieved a accuracy of **88%** over *17 categories* using our custom fastText embeddings trained on a large Indian news corpora. We employed a Bi-Lstm for classification, as it achieved the best results.
+
+2. For *NER task*, we achieved micro average f1-measure of **93.05** on *9 tags*, trained on the OntoNotes5.0 dataset, using a combination of Flair and Custom fastText embeddings. We employed a Bi-Lstm with a CRF layer on top for the sequence labelling task.
+
 
 ## Steps to run the program
 
