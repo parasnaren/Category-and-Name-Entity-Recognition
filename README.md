@@ -12,6 +12,11 @@ Program that performs named entity and category recognition on English sentences
 2. For *NER task*, we achieved micro average f1-measure of **93.05** on *9 tags*, trained on the OntoNotes5.0 dataset, using a combination of Flair and Custom fastText embeddings. We employed a Bi-Lstm with a CRF layer on top for the sequence labelling task.
 
 
+## User Interface
+
+![ui](https://user-images.githubusercontent.com/29833297/69327371-7318d100-0c73-11ea-86b6-c052c991e76a.PNG)
+
+
 ## Steps to run the program
 
 1.  Clone the repository
