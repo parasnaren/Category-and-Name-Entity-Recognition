@@ -1,0 +1,55 @@
+<span class="navbar-item">
+<div class="navbar-end">
+class="button is-white is-outlined"
+<div class="box" style="width=100px; height:40px;">
+					<div id="navbarMenu">
+                        <input class="button is-white is-outlined" type="button" style="text-align:center">
+                             Submit
+						</input>	
+					</div>
+				</div>	
+				
+				
+				
+				
+				
+ watch: {
+                query: function () {
+                    console.log(this.query);
+                    if (this.query == '') {
+                        this.result = '';
+                        return;
+                    }
+                    var payload = {
+                        'text': this.query
+                    };
+                    axios.post(`${base_url}api/ner`, payload).then(response => {
+                        var res = [];
+                        var left = 0;
+                        var d = response.data;
+                        for (e of d['entities']) {
+                            var begin = e['beginOffset'];
+                            var end = e['endOffset'];
+                            var type = e['type'];
+                            var text = d['words'].slice(left, begin).join(' ');
+                            res.push({
+                                'word': text,
+                                'color': ''
+                            });
+                            var text = d['words'].slice(begin, end).join(' ');
+                            res.push({
+                                'word': text,
+                                'color': this.type2color[type]
+                            });
+                            left = end;
+                        }
+                        var text = d['words'].slice(left, d['words'].length).join(' ');
+                        res.push({
+                            'word': text,
+                            'color': ''
+                        });
+                        this.result = res;
+                    })
+                }
+            }
+        })

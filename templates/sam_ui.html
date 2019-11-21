@@ -1,0 +1,114 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>NER</title>
+    <link rel="shortcut icon" href="../images/fav_icon.png" type="image/x-icon"> 
+    <link rel="stylesheet"  href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+    <!-- Bulma Version 0.7.1-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css" />
+    <link rel="stylesheet" type="text/css" href="/static/landing.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>	
+</head>
+
+<body>
+    <section class="hero is-info is-fullheight">
+        <div class="hero-head">
+            <nav class="navbar">
+                <div class="container">
+                    <div class="navbar-brand">
+                        <a class="navbar-item" href="./">
+                            <h1>
+                                <b class="has-text-white is-size-3">NAMED ENTITY RECOGNITION</b>
+                            </h1>
+                        </a>
+                    </div>
+                    
+                </div>
+            </nav>
+        </div>
+        
+        <div id="root" class="hero-body">
+            <div class="container">
+                <div class="column is-6 is-offset-3">
+                    <div class="box">
+
+                        <div class="field">
+                            <p class="control is-expanded" id="enterinput">
+                                <input id="sent" class="input" type="text"  placeholder="Enter a sentence" maxLength="100" v-model="query">
+                            </p>
+                        </div>
+                   </div>	
+				<div class="box">
+                        <div class="tags" style="margin:0">
+                            <span v-bind:class="value" v-for="(value, key) in type2color">[[ key ]]</span>
+                        </div>
+                        <hr style="margin: 0.7rem 0;background-color:#EFEFEF;">
+                        <template v-for="r in result">
+                            <span v-bind:class="r.color">[[ r.word ]]</span>&nbsp;
+                        </template>
+						<p id="OUTPUT_BOX">
+							<textarea cols=80> </textarea>
+						</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+</section>
+<script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+		$(document).on("keypress", "input", function(e){
+			if(e.which == 13){
+				var inputVal = $(this).val();
+				$.ajax({
+				data:{
+				sentence:inputVal},
+				url: "/_get_data/",
+				type: "POST",
+				})
+				.done(function(data){
+					
+					//$("#OUTPUT_BOX").text(data.sent+"   "+data.dict.PER+"    " +data.cat);
+					$("#OUTPUT_BOX").html(data);
+				});				
+			}
+		});
+        axios.defaults.xsrfCookieName = 'csrftoken';
+        axios.defaults.xsrfHeaderName = 'X-CSRFToken';
+        var base_url = window.location.href;
+		
+        var vm = new Vue({
+            el: '#root',
+            delimiters: ['[[', ']]'],
+            data: {
+                query: '',
+                result: [],
+                type2color: {
+                    'PERSON': 'tag is-info',
+					'NORP': 'tag is-light',
+					'FAC': 'tag is-black',
+					'ORG': 'tag is-success',
+					'WORK_OF_ART': 'tag is-link',
+					'LOC': 'tag is-primary',
+					'PRODUCT': 'tag is-dark',
+					'EVENT': 'tag is-warning',
+					'GPE': 'tag is-danger'
+                }
+			}
+        });
+           
+    </script>
+</body>
+
+</html>

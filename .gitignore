@@ -1,0 +1,11 @@
+# Ignore zip files
+.zip
+
+# Model too big
+checkpoint.pt
+
+# Not required files
+req.txt
+Untitled.ipynb
+.ipynb_checkpoints
+samsung
