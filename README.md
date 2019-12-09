@@ -9,7 +9,7 @@ Program that performs named entity and category recognition on English sentences
 
 1. For *Category classification*, we achieved a accuracy of **88%** over *17 categories* using our custom fastText embeddings trained on a large Indian news corpora. We employed a Bi-Lstm for classification, as it achieved the best results.
 
-2. For *NER task*, we achieved micro average f1-measure of **93.05** on *9 tags*, trained on the OntoNotes5.0 dataset, using a combination of Flair and Custom fastText embeddings. We employed a Bi-Lstm with a CRF layer on top for the sequence labelling task.
+2. For *NER task*, we achieved micro average f1-measure of **93.05** on *9 tags*, trained on the OntoNotes5.0 dataset, using a combination of Flair and Custom fastText embeddings. We employed a Bi-Lstm with a CRF layer on top for the sequence labelling task. The model also achieved an f1-score of **79** on the FIRE dataset containing entities from English Indian news. 
 
 
 ## User Interface
