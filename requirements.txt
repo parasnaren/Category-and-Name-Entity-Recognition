@@ -93,7 +93,7 @@ sqlitedict==1.6.0
 SudachiPy==0.4.0
 tabulate==0.8.5
 tensorboard==2.0.1
-tensorflow==2.0.0
+tensorflow==2.5.3
 tensorflow-estimator==2.0.1
 termcolor==1.1.0
 tiny-tokenizer==3.0.1
