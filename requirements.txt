@@ -60,7 +60,7 @@ packaging==19.2
 pandas==0.25.3
 parso==0.5.1
 pickleshare==0.7.5
-Pillow==6.2.1
+Pillow==9.0.1
 pluggy==0.13.0
 prompt-toolkit==2.0.10
 protobuf==3.10.0
